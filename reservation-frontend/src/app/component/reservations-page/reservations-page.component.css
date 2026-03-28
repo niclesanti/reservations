@@ -1,0 +1,141 @@
+:host {
+  display: block;
+}
+
+.reservations-page {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  margin: 0;
+}
+
+.reload-button,
+.cancel-button,
+.create-button {
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+.form-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+.reservation-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.75rem;
+  align-items: start;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+input,
+select {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  font: inherit;
+  background: #fff;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #93c5fd;
+  border-color: #3b82f6;
+}
+
+.field-error {
+  color: #b91c1c;
+  font-size: 0.78rem;
+}
+
+.reload-button {
+  background-color: #2563eb;
+}
+
+.cancel-button {
+  background-color: #dc2626;
+}
+
+.create-button {
+  background-color: #047857;
+  align-self: end;
+}
+
+.reload-button:disabled,
+.cancel-button:disabled,
+.create-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: #f9fafb;
+}
+
+.status {
+  font-weight: 600;
+  color: #15803d;
+}
+
+.status.cancelled {
+  color: #b91c1c;
+}
+
+.error {
+  color: #b91c1c;
+  margin: 0 0 1rem;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+}

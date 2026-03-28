@@ -1,0 +1,109 @@
+<section class="reservations-page">
+  <header class="header">
+    <h1>Reservas</h1>
+    <button type="button" class="reload-button" (click)="loadReservations()" [disabled]="isLoading">
+      {{ isLoading ? 'Cargando...' : 'Recargar' }}
+    </button>
+  </header>
+
+  <section class="form-card">
+    <h2>Nueva reserva</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submitReservation()" class="reservation-form">
+      <label>
+        Nombre cliente
+        <input type="text" formControlName="nombreCliente" placeholder="Ej: Ana Perez" />
+      </label>
+      @if (isFieldInvalid('nombreCliente')) {
+        <small class="field-error">El nombre del cliente es obligatorio.</small>
+      }
+
+      <label>
+        Fecha
+        <input type="date" formControlName="fecha" />
+      </label>
+      @if (isFieldInvalid('fecha')) {
+        <small class="field-error">La fecha es obligatoria.</small>
+      }
+
+      <label>
+        Hora
+        <input type="time" formControlName="hora" />
+      </label>
+      @if (isFieldInvalid('hora')) {
+        <small class="field-error">La hora es obligatoria.</small>
+      }
+
+      <label>
+        Servicio
+        <select formControlName="servicio">
+          <option value="">Selecciona un servicio</option>
+          @for (service of serviceOptions; track service) {
+            <option [value]="service">{{ service }}</option>
+          }
+        </select>
+      </label>
+      @if (isFieldInvalid('servicio')) {
+        <small class="field-error">El servicio es obligatorio.</small>
+      }
+
+      <button type="submit" class="create-button" [disabled]="isCreating">
+        {{ isCreating ? 'Guardando...' : 'Crear reserva' }}
+      </button>
+    </form>
+  </section>
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Servicio</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (reservation of reservations; track reservation.id) {
+          <tr>
+            <td>{{ reservation.id }}</td>
+            <td>{{ reservation.customerName }}</td>
+            <td>{{ reservation.date }}</td>
+            <td>{{ reservation.time }}</td>
+            <td>{{ reservation.service }}</td>
+            <td>
+              <span class="status" [class.cancelled]="reservation.status === 'CANCELLED'">
+                {{ reservation.status }}
+              </span>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="cancel-button"
+                (click)="cancel(reservation.id)"
+                [disabled]="reservation.status === 'CANCELLED'"
+              >
+                Cancelar
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" class="empty">No hay reservas para mostrar.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (toastMessage) {
+    <app-toast [message]="toastMessage" (close)="hideToast()" />
+  }
+</section>
